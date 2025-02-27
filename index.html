@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartHome.AI - Intelligent Home Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+        }
+        .device-card {
+            transition: all 0.3s ease;
+        }
+        .device-card:hover {
+            transform: translateY(-2px);
+        }
+        .room-card.active {
+            border-color: #4f46e5;
+            background-color: #eef2ff;
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <i class="bi bi-house-heart-fill text-2xl text-indigo-600"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">SmartHome.AI</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="voiceCommandBtn" class="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                            <i class="bi bi-mic-fill"></i>
+                            <span>Voice Command</span>
+                        </button>
+                        <button class="text-gray-500 hover:text-gray-700">
+                            <i class="bi bi-gear-fill text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Rooms Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Rooms</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div class="room-card active p-4 border rounded-xl text-center cursor-pointer">
+                        <i class="bi bi-house-door text-2xl text-indigo-600"></i>
+                        <p class="mt-2">Living Room</p>
+                    </div>
+                    <div class="room-card p-4 border rounded-xl text-center cursor-pointer">
+                        <i class="bi bi-door-closed text-2xl text-gray-600"></i>
+                        <p class="mt-2">Bedroom</p>
+                    </div>
+                    <div class="room-card p-4 border rounded-xl text-center cursor-pointer">
+                        <i class="bi bi-cup-hot text-2xl text-gray-600"></i>
+                        <p class="mt-2">Kitchen</p>
+                    </div>
+                    <div class="room-card p-4 border rounded-xl text-center cursor-pointer">
+                        <i class="bi bi-droplet text-2xl text-gray-600"></i>
+                        <p class="mt-2">Bathroom</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devices Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Smart Lights -->
+                <div class="device-card bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <i class="bi bi-lightbulb text-2xl text-yellow-500"></i>
+                            <h3 class="ml-2 font-semibold">Smart Lights</h3>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                    <input type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" min="0" max="100" value="80">
+                    <div class="flex justify-between mt-2 text-sm text-gray-500">
+                        <span>0%</span>
+                        <span>80%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+
+                <!-- Temperature Control -->
+                <div class="device-card bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <i class="bi bi-thermometer-half text-2xl text-red-500"></i>
+                            <h3 class="ml-2 font-semibold">Temperature</h3>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-4xl font-bold">22°C</span>
+                        <div class="flex justify-center space-x-4 mt-4">
+                            <button class="bg-gray-100 p-2 rounded-full hover:bg-gray-200">
+                                <i class="bi bi-dash-lg"></i>
+                            </button>
+                            <button class="bg-gray-100 p-2 rounded-full hover:bg-gray-200">
+                                <i class="bi bi-plus-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Camera -->
+                <div class="device-card bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <i class="bi bi-camera-video text-2xl text-green-500"></i>
+                            <h3 class="ml-2 font-semibold">Security Camera</h3>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                        </label>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg h-40 flex items-center justify-center">
+                        <i class="bi bi-camera-video-fill text-4xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Assistant -->
+            <div class="fixed bottom-4 right-4">
+                <div id="aiChat" class="hidden bg-white rounded-lg shadow-lg w-80">
+                    <div class="p-4 border-b">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold">AI Assistant</h3>
+                            <button onclick="toggleAIChat()" class="text-gray-500 hover:text-gray-700">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4 h-80 overflow-y-auto" id="chatMessages">
+                        <div class="bg-gray-100 rounded-lg p-3 mb-3">
+                            <p class="text-sm">Hello! How can I help you with your smart home today?</p>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t">
+                        <div class="flex space-x-2">
+                            <input type="text" id="messageInput" class="flex-1 border rounded-lg px-3 py-2" placeholder="Type your message...">
+                            <button onclick="sendMessage()" class="bg-indigo-600 text-white px-4 rounded-lg hover:bg-indigo-700">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="toggleAIChat()" class="bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700">
+                    <i class="bi bi-robot"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Voice Command
+        const voiceCommandBtn = document.getElementById('voiceCommandBtn');
+        let isListening = false;
+
+        voiceCommandBtn.addEventListener('click', () => {
+            if (!isListening) {
+                startVoiceRecognition();
+            } else {
+                stopVoiceRecognition();
+            }
+        });
+
+        function startVoiceRecognition() {
+            isListening = true;
+            voiceCommandBtn.classList.add('pulse');
+            voiceCommandBtn.innerHTML = '<i class="bi bi-mic-fill"></i><span>Listening...</span>';
+            
+            // Simulate voice recognition (in real app, use Web Speech API)
+            setTimeout(() => {
+                processVoiceCommand("Turn on living room lights");
+                stopVoiceRecognition();
+            }, 3000);
+        }
+
+        function stopVoiceRecognition() {
+            isListening = false;
+            voiceCommandBtn.classList.remove('pulse');
+            voiceCommandBtn.innerHTML = '<i class="bi bi-mic-fill"></i><span>Voice Command</span>';
+        }
+
+        function processVoiceCommand(command) {
+            addMessage(command, 'user');
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                addMessage("Turning on living room lights", 'ai');
+                // Here you would actually control the smart home devices
+            }, 1000);
+        }
+
+        // AI Chat
+        function toggleAIChat() {
+            const aiChat = document.getElementById('aiChat');
+            aiChat.classList.toggle('hidden');
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 
+                'bg-indigo-100 rounded-lg p-3 mb-3 ml-8' : 
+                'bg-gray-100 rounded-lg p-3 mb-3';
+            messageDiv.innerHTML = `<p class="text-sm">${text}</p>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                messageInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const responses = [
+                        "I'll help you with that right away.",
+                        "Adjusting your smart home settings now.",
+                        "I've processed your request. Is there anything else you need?"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'ai');
+                }, 1000);
+            }
+        }
+
+        // Initialize event listeners for room cards
+        document.querySelectorAll('.room-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.room-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
